@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Color properties (RGBA) -->
+  <xacro:property name="light_grey_rgba" value="0.8 0.8 0.8 1.0"/>
+  <xacro:property name="charcoal_rgba" value="0.15 0.15 0.15 1.0"/>
+
+  <!-- Base visual compensation / mount rotation (rad) -->
+  <xacro:property name="base_offset_rz" value="${pi/2}"/>
+
+  <!-- Shoulder link visual compensation (rad) -->
+  <xacro:property name="shoulder_offset_rx" value="${pi/2}"/>
+  <xacro:property name="shoulder_offset_rz" value="${pi/2}"/>
+
+  <!-- Arm link visual compensations for all-Z joint axes -->
+  <xacro:property name="upper_arm_visual_ry" value="${-pi/2}"/>
+  <xacro:property name="lower_arm_visual_ry" value="${-pi/2}"/>
+  <xacro:property name="wrist_visual_ry"     value="${-pi/2}"/>
+  <xacro:property name="gripper_visual_rx"   value="${pi/2}"/>
+
+  <!-- Joint origins (all-Z axis convention) -->
+  <xacro:property name="shoulder_pan_xyz" value="0.0452 0 0.0165"/>
+
+  <xacro:property name="shoulder_lift_xyz" value="0.0306 0 0.1025"/>
+  <xacro:property name="shoulder_lift_rpy" value="${-pi/2} ${pi - 1.8} 0"/>
+
+  <xacro:property name="elbow_flex_xyz" value="-0.028 0.11257 0"/>
+  <xacro:property name="elbow_flex_rpy" value="0 0 ${pi/2}"/>
+
+  <xacro:property name="wrist_flex_xyz" value="-0.1349 0.0052 0"/>
+  <xacro:property name="wrist_flex_rpy" value="0 0 -1"/>
+
+  <xacro:property name="wrist_roll_xyz" value="0 -0.0601 0"/>
+  <xacro:property name="wrist_roll_rpy" value="${-pi/2} 0 0"/>
+
+  <xacro:property name="gripper_xyz" value="-0.0202 0 -0.0244"/>
+  <xacro:property name="gripper_rpy" value="${pi/2} 0 ${pi}"/>
+
+</robot>

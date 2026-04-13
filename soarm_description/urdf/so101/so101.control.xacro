@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Shared hardware interface parameters (single STS servo bus) -->
+  <xacro:property name="serial_port" default="/dev/ttySERVO"/>
+  <xacro:property name="baud_rate" default="1000000"/>
+  <xacro:property name="use_mock" default="false"/>
+  <xacro:property name="use_sync_write" default="true"/>
+
+  <!-- Motor IDs -->
+  <xacro:property name="shoulder_pan_motor_id" value="1"/>
+  <xacro:property name="shoulder_lift_motor_id" value="2"/>
+  <xacro:property name="elbow_flex_motor_id" value="3"/>
+  <xacro:property name="wrist_flex_motor_id" value="4"/>
+  <xacro:property name="wrist_roll_motor_id" value="5"/>
+  <xacro:property name="gripper_motor_id" value="6"/>
+  <xacro:property name="operating_mode" value="0"/>  <!-- Position mode -->
+
+  <!-- Motor-specific parameter (STS3215 default) -->
+  <xacro:property name="sts_max_velocity_steps" value="3400"/>  <!-- Max hardware velocity in steps/s -->
+
+  <!-- Maximum allowable torque/velocity for each motor -->
+  <xacro:property name="max_velocity_rads" value="${sts_max_velocity_steps*2*pi/4096}"/>  <!-- rad/s -->
+  <xacro:property name="max_torque_nm" value="2.942"/>  <!-- N⋅m (30 kgf⋅cm for STS3215) -->
+
+  <!-- Joint limits (from onshape-to-robot calibration) -->
+  <xacro:property name="shoulder_pan_lower" value="-1.91986"/>
+  <xacro:property name="shoulder_pan_upper" value="1.91986"/>
+  <xacro:property name="shoulder_lift_lower" value="-1.74533"/>
+  <xacro:property name="shoulder_lift_upper" value="1.74533"/>
+  <xacro:property name="elbow_flex_lower" value="-1.69"/>
+  <xacro:property name="elbow_flex_upper" value="1.69"/>
+  <xacro:property name="wrist_flex_lower" value="-1.65806"/>
+  <xacro:property name="wrist_flex_upper" value="1.65806"/>
+  <xacro:property name="wrist_roll_lower" value="-2.74385"/>
+  <xacro:property name="wrist_roll_upper" value="2.84121"/>
+  <xacro:property name="gripper_lower" value="-0.174533"/>
+  <xacro:property name="gripper_upper" value="1.74533"/>
+
+</robot>
