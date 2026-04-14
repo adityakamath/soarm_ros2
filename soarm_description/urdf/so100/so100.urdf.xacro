@@ -257,14 +257,23 @@
       <plugin>sts_hardware_interface/STSHardwareInterface</plugin>
       <param name="serial_port">$(arg serial_port)</param>
       <param name="baud_rate">${baud_rate}</param>
+      <param name="communication_timeout_ms">100</param>
       <param name="use_sync_write">$(arg use_sync_write)</param>
       <param name="enable_mock_mode">$(arg use_mock)</param>
+      <param name="max_velocity_steps">${sts_max_velocity_steps}</param>
+      <param name="reset_states_on_activate">true</param>
     </hardware>
 
     <joint name="shoulder_pan_joint">
       <param name="motor_id">${shoulder_pan_motor_id}</param>
       <param name="operating_mode">${operating_mode}</param>
+      <param name="min_position">${shoulder_pan_lower}</param>
+      <param name="max_position">${shoulder_pan_upper}</param>
+      <param name="max_velocity">${max_velocity_rads}</param>
+      <param name="position_center_steps">2048</param>
       <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="acceleration"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
@@ -277,7 +286,13 @@
     <joint name="shoulder_lift_joint">
       <param name="motor_id">${shoulder_lift_motor_id}</param>
       <param name="operating_mode">${operating_mode}</param>
+      <param name="min_position">${shoulder_lift_lower}</param>
+      <param name="max_position">${shoulder_lift_upper}</param>
+      <param name="max_velocity">${max_velocity_rads}</param>
+      <param name="position_center_steps">2048</param>
       <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="acceleration"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
@@ -290,7 +305,13 @@
     <joint name="elbow_flex_joint">
       <param name="motor_id">${elbow_flex_motor_id}</param>
       <param name="operating_mode">${operating_mode}</param>
+      <param name="min_position">${elbow_flex_lower}</param>
+      <param name="max_position">${elbow_flex_upper}</param>
+      <param name="max_velocity">${max_velocity_rads}</param>
+      <param name="position_center_steps">2048</param>
       <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="acceleration"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
@@ -303,7 +324,13 @@
     <joint name="wrist_flex_joint">
       <param name="motor_id">${wrist_flex_motor_id}</param>
       <param name="operating_mode">${operating_mode}</param>
+      <param name="min_position">${wrist_flex_lower}</param>
+      <param name="max_position">${wrist_flex_upper}</param>
+      <param name="max_velocity">${max_velocity_rads}</param>
+      <param name="position_center_steps">2048</param>
       <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="acceleration"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
@@ -316,7 +343,13 @@
     <joint name="wrist_roll_joint">
       <param name="motor_id">${wrist_roll_motor_id}</param>
       <param name="operating_mode">${operating_mode}</param>
+      <param name="min_position">${wrist_roll_lower}</param>
+      <param name="max_position">${wrist_roll_upper}</param>
+      <param name="max_velocity">${max_velocity_rads}</param>
+      <param name="position_center_steps">2048</param>
       <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="acceleration"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
@@ -329,7 +362,13 @@
     <joint name="gripper_joint">
       <param name="motor_id">${gripper_motor_id}</param>
       <param name="operating_mode">${operating_mode}</param>
+      <param name="min_position">${gripper_lower}</param>
+      <param name="max_position">${gripper_upper}</param>
+      <param name="max_velocity">${max_velocity_rads}</param>
+      <param name="position_center_steps">2048</param>
       <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <command_interface name="acceleration"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
