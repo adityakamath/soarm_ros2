@@ -313,7 +313,7 @@
 
   <!-- JOINTS -->
 
-  <joint name="shoulder_pan" type="revolute">
+  <joint name="shoulder_pan_joint" type="revolute">
     <parent link="base_link"/>
     <child link="shoulder_link"/>
     <origin xyz="${shoulder_pan_xyz}"/>
@@ -321,7 +321,7 @@
     <limit lower="${shoulder_pan_lower}" upper="${shoulder_pan_upper}" effort="${max_torque_nm}" velocity="${max_velocity_rads}"/>
   </joint>
 
-  <joint name="shoulder_lift" type="revolute">
+  <joint name="shoulder_lift_joint" type="revolute">
     <parent link="shoulder_link"/>
     <child link="upper_arm_link"/>
     <origin xyz="${shoulder_lift_xyz}" rpy="${shoulder_lift_rpy}"/>
@@ -329,7 +329,7 @@
     <limit lower="${shoulder_lift_lower}" upper="${shoulder_lift_upper}" effort="${max_torque_nm}" velocity="${max_velocity_rads}"/>
   </joint>
 
-  <joint name="elbow_flex" type="revolute">
+  <joint name="elbow_flex_joint" type="revolute">
     <parent link="upper_arm_link"/>
     <child link="lower_arm_link"/>
     <origin xyz="${elbow_flex_xyz}" rpy="${elbow_flex_rpy}"/>
@@ -337,7 +337,7 @@
     <limit lower="${elbow_flex_lower}" upper="${elbow_flex_upper}" effort="${max_torque_nm}" velocity="${max_velocity_rads}"/>
   </joint>
 
-  <joint name="wrist_flex" type="revolute">
+  <joint name="wrist_flex_joint" type="revolute">
     <parent link="lower_arm_link"/>
     <child link="wrist_link"/>
     <origin xyz="${wrist_flex_xyz}" rpy="${wrist_flex_rpy}"/>
@@ -345,7 +345,7 @@
     <limit lower="${wrist_flex_lower}" upper="${wrist_flex_upper}" effort="${max_torque_nm}" velocity="${max_velocity_rads}"/>
   </joint>
 
-  <joint name="wrist_roll" type="revolute">
+  <joint name="wrist_roll_joint" type="revolute">
     <parent link="wrist_link"/>
     <child link="gripper_link"/>
     <origin xyz="${wrist_roll_xyz}" rpy="${wrist_roll_rpy}"/>
@@ -359,7 +359,7 @@
     <origin xyz="${gripper_frame_xyz}" rpy="${gripper_frame_rpy}"/>
   </joint>
 
-  <joint name="gripper" type="revolute">
+  <joint name="gripper_joint" type="revolute">
     <parent link="gripper_link"/>
     <child link="moving_jaw_link"/>
     <origin xyz="${gripper_xyz}" rpy="${gripper_rpy}"/>
@@ -380,7 +380,7 @@
       <param name="reset_states_on_activate">true</param>
     </hardware>
 
-    <joint name="shoulder_pan">
+    <joint name="shoulder_pan_joint">
       <param name="motor_id">${shoulder_pan_motor_id}</param>
       <param name="operating_mode">${operating_mode}</param>
       <param name="min_position">${shoulder_pan_lower}</param>
@@ -388,8 +388,6 @@
       <param name="max_velocity">${max_velocity_rads}</param>
       <param name="position_center_steps">2048</param>
       <command_interface name="position"/>
-      <command_interface name="velocity"/>
-      <command_interface name="acceleration"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
@@ -399,7 +397,7 @@
       <state_interface name="is_moving"/>
     </joint>
 
-    <joint name="shoulder_lift">
+    <joint name="shoulder_lift_joint">
       <param name="motor_id">${shoulder_lift_motor_id}</param>
       <param name="operating_mode">${operating_mode}</param>
       <param name="min_position">${shoulder_lift_lower}</param>
@@ -407,8 +405,6 @@
       <param name="max_velocity">${max_velocity_rads}</param>
       <param name="position_center_steps">2048</param>
       <command_interface name="position"/>
-      <command_interface name="velocity"/>
-      <command_interface name="acceleration"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
@@ -418,7 +414,7 @@
       <state_interface name="is_moving"/>
     </joint>
 
-    <joint name="elbow_flex">
+    <joint name="elbow_flex_joint">
       <param name="motor_id">${elbow_flex_motor_id}</param>
       <param name="operating_mode">${operating_mode}</param>
       <param name="min_position">${elbow_flex_lower}</param>
@@ -426,8 +422,6 @@
       <param name="max_velocity">${max_velocity_rads}</param>
       <param name="position_center_steps">2048</param>
       <command_interface name="position"/>
-      <command_interface name="velocity"/>
-      <command_interface name="acceleration"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
@@ -437,7 +431,7 @@
       <state_interface name="is_moving"/>
     </joint>
 
-    <joint name="wrist_flex">
+    <joint name="wrist_flex_joint">
       <param name="motor_id">${wrist_flex_motor_id}</param>
       <param name="operating_mode">${operating_mode}</param>
       <param name="min_position">${wrist_flex_lower}</param>
@@ -445,8 +439,6 @@
       <param name="max_velocity">${max_velocity_rads}</param>
       <param name="position_center_steps">2048</param>
       <command_interface name="position"/>
-      <command_interface name="velocity"/>
-      <command_interface name="acceleration"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
@@ -456,7 +448,7 @@
       <state_interface name="is_moving"/>
     </joint>
 
-    <joint name="wrist_roll">
+    <joint name="wrist_roll_joint">
       <param name="motor_id">${wrist_roll_motor_id}</param>
       <param name="operating_mode">${operating_mode}</param>
       <param name="min_position">${wrist_roll_lower}</param>
@@ -464,8 +456,6 @@
       <param name="max_velocity">${max_velocity_rads}</param>
       <param name="position_center_steps">2048</param>
       <command_interface name="position"/>
-      <command_interface name="velocity"/>
-      <command_interface name="acceleration"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
@@ -475,7 +465,7 @@
       <state_interface name="is_moving"/>
     </joint>
 
-    <joint name="gripper">
+    <joint name="gripper_joint">
       <param name="motor_id">${gripper_motor_id}</param>
       <param name="operating_mode">${operating_mode}</param>
       <param name="min_position">${gripper_lower}</param>
@@ -483,8 +473,6 @@
       <param name="max_velocity">${max_velocity_rads}</param>
       <param name="position_center_steps">2048</param>
       <command_interface name="position"/>
-      <command_interface name="velocity"/>
-      <command_interface name="acceleration"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
