@@ -20,7 +20,7 @@
           offset: 0.0
         twist-angular-x:
           axis: 2  # Right stick horizontal - drives wrist roll
-          scale: 1.0
+          scale: -1.5  # Negated: raw axis 2 reads opposite the physically-intuitive roll direction
           offset: 0.0
         header-frame_id:
           value: 'base_footprint'  # verified URDF root, not base_link
