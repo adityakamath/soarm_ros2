@@ -139,24 +139,24 @@ class TestComputeGripperTarget:
         assert node._compute_gripper_target() is None
 
     def test_raw_value_remaps_into_limit(self, node):
-        # _compute_gripper_target calls _remap(raw, upper, midpoint) - note lo/hi swapped vs.
-        # the plain _remap contract, so raw=-1.0 (not +1.0) maps to the upper limit here.
+        # _compute_gripper_target calls _remap(raw, lower, upper) - standard contract, so
+        # raw=+1.0 maps to the upper limit.
         node._gripper_limit = (-1.0, 1.0)
-        node._gripper_raw = -1.0
+        node._gripper_raw = 1.0
         assert node._compute_gripper_target() == pytest.approx(1.0)
 
     def test_effort_gain_disabled_by_default_ignores_current_effort(self, node):
         node._gripper_limit = (-1.0, 1.0)
-        node._gripper_raw = 1.0  # -> target 0.0
+        node._gripper_raw = 1.0  # -> target 1.0 (upper)
         node._current_effort = 5.0  # would retreat the target if effort_gain were nonzero
-        assert node._compute_gripper_target() == pytest.approx(0.0)
+        assert node._compute_gripper_target() == pytest.approx(1.0)
 
     def test_effort_gain_enabled_retreats_target(self, node):
         node._gripper_limit = (-1.0, 1.0)
         node._effort_gain = 0.1
-        node._gripper_raw = 1.0  # -> target 0.0 before the effort-gain retreat below
+        node._gripper_raw = 1.0  # -> target 1.0 (upper) before the effort-gain retreat below
         node._current_effort = 5.0
-        # target - effort_gain * current_effort = 0.0 - 0.1*5.0 = -0.5
-        assert node._compute_gripper_target() == pytest.approx(-0.5)
+        # target - effort_gain * current_effort = 1.0 - 0.1*5.0 = 0.5
+        assert node._compute_gripper_target() == pytest.approx(0.5)
 
 
