@@ -14,8 +14,30 @@ wrist_flex_motor_id: 4
 wrist_roll_motor_id: 5
 gripper_motor_id: 6
 
-p_coefficient: 14
-d_coefficient: 24
-i_coefficient: 0
+# Per-joint PID (Mode 0) - must be tuned per motor, not shared system-wide (different joints
+# carry different loads). Start all six from the same values, then tune independently.
+shoulder_pan_p_coefficient: 14
+shoulder_pan_d_coefficient: 24
+shoulder_pan_i_coefficient: 0
+
+shoulder_lift_p_coefficient: 14
+shoulder_lift_d_coefficient: 24
+shoulder_lift_i_coefficient: 0
+
+elbow_flex_p_coefficient: 14
+elbow_flex_d_coefficient: 24
+elbow_flex_i_coefficient: 0
+
+wrist_flex_p_coefficient: 14
+wrist_flex_d_coefficient: 24
+wrist_flex_i_coefficient: 0
+
+wrist_roll_p_coefficient: 14
+wrist_roll_d_coefficient: 24
+wrist_roll_i_coefficient: 0
+
+gripper_p_coefficient: 14
+gripper_d_coefficient: 24
+gripper_i_coefficient: 0
 
 deadband: 10

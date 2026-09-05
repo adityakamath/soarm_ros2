@@ -17,9 +17,24 @@
   <xacro:arg name="wrist_flex_motor_id" default="${wrist_flex_motor_id}"/>
   <xacro:arg name="wrist_roll_motor_id" default="${wrist_roll_motor_id}"/>
   <xacro:arg name="gripper_motor_id" default="${gripper_motor_id}"/>
-  <xacro:arg name="p_coefficient" default="${p_coefficient}"/>
-  <xacro:arg name="d_coefficient" default="${d_coefficient}"/>
-  <xacro:arg name="i_coefficient" default="${i_coefficient}"/>
+  <xacro:arg name="shoulder_pan_p_coefficient" default="${shoulder_pan_p_coefficient}"/>
+  <xacro:arg name="shoulder_pan_d_coefficient" default="${shoulder_pan_d_coefficient}"/>
+  <xacro:arg name="shoulder_pan_i_coefficient" default="${shoulder_pan_i_coefficient}"/>
+  <xacro:arg name="shoulder_lift_p_coefficient" default="${shoulder_lift_p_coefficient}"/>
+  <xacro:arg name="shoulder_lift_d_coefficient" default="${shoulder_lift_d_coefficient}"/>
+  <xacro:arg name="shoulder_lift_i_coefficient" default="${shoulder_lift_i_coefficient}"/>
+  <xacro:arg name="elbow_flex_p_coefficient" default="${elbow_flex_p_coefficient}"/>
+  <xacro:arg name="elbow_flex_d_coefficient" default="${elbow_flex_d_coefficient}"/>
+  <xacro:arg name="elbow_flex_i_coefficient" default="${elbow_flex_i_coefficient}"/>
+  <xacro:arg name="wrist_flex_p_coefficient" default="${wrist_flex_p_coefficient}"/>
+  <xacro:arg name="wrist_flex_d_coefficient" default="${wrist_flex_d_coefficient}"/>
+  <xacro:arg name="wrist_flex_i_coefficient" default="${wrist_flex_i_coefficient}"/>
+  <xacro:arg name="wrist_roll_p_coefficient" default="${wrist_roll_p_coefficient}"/>
+  <xacro:arg name="wrist_roll_d_coefficient" default="${wrist_roll_d_coefficient}"/>
+  <xacro:arg name="wrist_roll_i_coefficient" default="${wrist_roll_i_coefficient}"/>
+  <xacro:arg name="gripper_p_coefficient" default="${gripper_p_coefficient}"/>
+  <xacro:arg name="gripper_d_coefficient" default="${gripper_d_coefficient}"/>
+  <xacro:arg name="gripper_i_coefficient" default="${gripper_i_coefficient}"/>
   <xacro:arg name="deadband" default="${deadband}"/>
 
   <!-- real=STS serial plugin, mujoco=MujocoSystemInterface, mock_components=GenericSystem. -->
@@ -374,10 +389,17 @@
       <param name="max_velocity_steps">${sts_protocol_max_vel_steps}</param>
       <param name="max_velocity">${max_velocity_rads}</param>
       <param name="position_center_steps">2048</param>
-      <param name="p_coefficient">$(arg p_coefficient)</param>
-      <param name="d_coefficient">$(arg d_coefficient)</param>
-      <param name="i_coefficient">$(arg i_coefficient)</param>
+      <param name="p_coefficient">$(arg shoulder_pan_p_coefficient)</param>
+      <param name="d_coefficient">$(arg shoulder_pan_d_coefficient)</param>
+      <param name="i_coefficient">$(arg shoulder_pan_i_coefficient)</param>
       <param name="deadband">$(arg deadband)</param>
+      <!-- Undocumented STS3215 EEPROM tuning registers (community-discovered). Uncomment to enable;
+           internal_max_vel/internal_max_acc/internal_acc_coeff: [0,254], internal_control_period: [1,254].
+      <param name="internal_max_vel">65</param>
+      <param name="internal_max_acc">254</param>
+      <param name="internal_acc_coeff">0</param>
+      <param name="internal_control_period">20</param>
+      -->
       <!-- cmd interfaces depend on arm_operating_mode -->
       <xacro:if value="${'$(arg arm_operating_mode)' == '2'}">
         <command_interface name="effort"/>
@@ -407,10 +429,17 @@
       <param name="max_velocity_steps">${sts_protocol_max_vel_steps}</param>
       <param name="max_velocity">${max_velocity_rads}</param>
       <param name="position_center_steps">2048</param>
-      <param name="p_coefficient">$(arg p_coefficient)</param>
-      <param name="d_coefficient">$(arg d_coefficient)</param>
-      <param name="i_coefficient">$(arg i_coefficient)</param>
+      <param name="p_coefficient">$(arg shoulder_lift_p_coefficient)</param>
+      <param name="d_coefficient">$(arg shoulder_lift_d_coefficient)</param>
+      <param name="i_coefficient">$(arg shoulder_lift_i_coefficient)</param>
       <param name="deadband">$(arg deadband)</param>
+      <!-- Undocumented STS3215 EEPROM tuning registers (community-discovered). Uncomment to enable;
+           internal_max_vel/internal_max_acc/internal_acc_coeff: [0,254], internal_control_period: [1,254].
+      <param name="internal_max_vel">65</param>
+      <param name="internal_max_acc">254</param>
+      <param name="internal_acc_coeff">0</param>
+      <param name="internal_control_period">20</param>
+      -->
       <!-- cmd interfaces depend on arm_operating_mode -->
       <xacro:if value="${'$(arg arm_operating_mode)' == '2'}">
         <command_interface name="effort"/>
@@ -440,10 +469,17 @@
       <param name="max_velocity_steps">${sts_protocol_max_vel_steps}</param>
       <param name="max_velocity">${max_velocity_rads}</param>
       <param name="position_center_steps">2048</param>
-      <param name="p_coefficient">$(arg p_coefficient)</param>
-      <param name="d_coefficient">$(arg d_coefficient)</param>
-      <param name="i_coefficient">$(arg i_coefficient)</param>
+      <param name="p_coefficient">$(arg elbow_flex_p_coefficient)</param>
+      <param name="d_coefficient">$(arg elbow_flex_d_coefficient)</param>
+      <param name="i_coefficient">$(arg elbow_flex_i_coefficient)</param>
       <param name="deadband">$(arg deadband)</param>
+      <!-- Undocumented STS3215 EEPROM tuning registers (community-discovered). Uncomment to enable;
+           internal_max_vel/internal_max_acc/internal_acc_coeff: [0,254], internal_control_period: [1,254].
+      <param name="internal_max_vel">65</param>
+      <param name="internal_max_acc">254</param>
+      <param name="internal_acc_coeff">0</param>
+      <param name="internal_control_period">20</param>
+      -->
       <!-- cmd interfaces depend on arm_operating_mode -->
       <xacro:if value="${'$(arg arm_operating_mode)' == '2'}">
         <command_interface name="effort"/>
@@ -473,10 +509,17 @@
       <param name="max_velocity_steps">${sts_protocol_max_vel_steps}</param>
       <param name="max_velocity">${max_velocity_rads}</param>
       <param name="position_center_steps">2048</param>
-      <param name="p_coefficient">$(arg p_coefficient)</param>
-      <param name="d_coefficient">$(arg d_coefficient)</param>
-      <param name="i_coefficient">$(arg i_coefficient)</param>
+      <param name="p_coefficient">$(arg wrist_flex_p_coefficient)</param>
+      <param name="d_coefficient">$(arg wrist_flex_d_coefficient)</param>
+      <param name="i_coefficient">$(arg wrist_flex_i_coefficient)</param>
       <param name="deadband">$(arg deadband)</param>
+      <!-- Undocumented STS3215 EEPROM tuning registers (community-discovered). Uncomment to enable;
+           internal_max_vel/internal_max_acc/internal_acc_coeff: [0,254], internal_control_period: [1,254].
+      <param name="internal_max_vel">65</param>
+      <param name="internal_max_acc">254</param>
+      <param name="internal_acc_coeff">0</param>
+      <param name="internal_control_period">20</param>
+      -->
       <!-- cmd interfaces depend on arm_operating_mode -->
       <xacro:if value="${'$(arg arm_operating_mode)' == '2'}">
         <command_interface name="effort"/>
@@ -506,10 +549,17 @@
       <param name="max_velocity_steps">${sts_protocol_max_vel_steps}</param>
       <param name="max_velocity">${max_velocity_rads}</param>
       <param name="position_center_steps">2048</param>
-      <param name="p_coefficient">$(arg p_coefficient)</param>
-      <param name="d_coefficient">$(arg d_coefficient)</param>
-      <param name="i_coefficient">$(arg i_coefficient)</param>
+      <param name="p_coefficient">$(arg wrist_roll_p_coefficient)</param>
+      <param name="d_coefficient">$(arg wrist_roll_d_coefficient)</param>
+      <param name="i_coefficient">$(arg wrist_roll_i_coefficient)</param>
       <param name="deadband">$(arg deadband)</param>
+      <!-- Undocumented STS3215 EEPROM tuning registers (community-discovered). Uncomment to enable;
+           internal_max_vel/internal_max_acc/internal_acc_coeff: [0,254], internal_control_period: [1,254].
+      <param name="internal_max_vel">65</param>
+      <param name="internal_max_acc">254</param>
+      <param name="internal_acc_coeff">0</param>
+      <param name="internal_control_period">20</param>
+      -->
       <!-- cmd interfaces depend on arm_operating_mode -->
       <xacro:if value="${'$(arg arm_operating_mode)' == '2'}">
         <command_interface name="effort"/>
@@ -539,10 +589,17 @@
       <param name="max_velocity_steps">${sts_protocol_max_vel_steps}</param>
       <param name="max_velocity">${max_velocity_rads}</param>
       <param name="position_center_steps">2048</param>
-      <param name="p_coefficient">$(arg p_coefficient)</param>
-      <param name="d_coefficient">$(arg d_coefficient)</param>
-      <param name="i_coefficient">$(arg i_coefficient)</param>
+      <param name="p_coefficient">$(arg gripper_p_coefficient)</param>
+      <param name="d_coefficient">$(arg gripper_d_coefficient)</param>
+      <param name="i_coefficient">$(arg gripper_i_coefficient)</param>
       <param name="deadband">$(arg deadband)</param>
+      <!-- Undocumented STS3215 EEPROM tuning registers (community-discovered). Uncomment to enable;
+           internal_max_vel/internal_max_acc/internal_acc_coeff: [0,254], internal_control_period: [1,254].
+      <param name="internal_max_vel">65</param>
+      <param name="internal_max_acc">254</param>
+      <param name="internal_acc_coeff">0</param>
+      <param name="internal_control_period">20</param>
+      -->
       <!-- cmd interfaces depend on gripper_operating_mode -->
       <xacro:if value="${'$(arg gripper_operating_mode)' == '2'}">
         <command_interface name="effort"/>

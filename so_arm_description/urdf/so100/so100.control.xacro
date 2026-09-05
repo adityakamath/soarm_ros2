@@ -27,9 +27,24 @@
   <xacro:property name="max_torque_nm" value="2.942"/>  <!-- N⋅m (30 kgf⋅cm for STS3215) -->
 
   <!-- Position-mode (Mode 0) internal servo PID, written to EEPROM on activate -->
-  <xacro:property name="p_coefficient" value="14"/>
-  <xacro:property name="d_coefficient" value="24"/>
-  <xacro:property name="i_coefficient" value="0"/>
+  <xacro:property name="shoulder_pan_p_coefficient" value="14"/>
+  <xacro:property name="shoulder_pan_d_coefficient" value="24"/>
+  <xacro:property name="shoulder_pan_i_coefficient" value="0"/>
+  <xacro:property name="shoulder_lift_p_coefficient" value="14"/>
+  <xacro:property name="shoulder_lift_d_coefficient" value="24"/>
+  <xacro:property name="shoulder_lift_i_coefficient" value="0"/>
+  <xacro:property name="elbow_flex_p_coefficient" value="14"/>
+  <xacro:property name="elbow_flex_d_coefficient" value="24"/>
+  <xacro:property name="elbow_flex_i_coefficient" value="0"/>
+  <xacro:property name="wrist_flex_p_coefficient" value="14"/>
+  <xacro:property name="wrist_flex_d_coefficient" value="24"/>
+  <xacro:property name="wrist_flex_i_coefficient" value="0"/>
+  <xacro:property name="wrist_roll_p_coefficient" value="14"/>
+  <xacro:property name="wrist_roll_d_coefficient" value="24"/>
+  <xacro:property name="wrist_roll_i_coefficient" value="0"/>
+  <xacro:property name="gripper_p_coefficient" value="14"/>
+  <xacro:property name="gripper_d_coefficient" value="24"/>
+  <xacro:property name="gripper_i_coefficient" value="0"/>
   <!-- Position insensitive-area (CW_DEAD/CCW_DEAD, both set to this value) -->
   <xacro:property name="deadband" value="10"/>
 
