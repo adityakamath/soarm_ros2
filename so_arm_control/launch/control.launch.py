@@ -7,6 +7,8 @@ file that composes this with teleop.launch.py.
 import subprocess
 import tempfile
 
+import yaml
+
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, OpaqueFunction, TimerAction
 from launch.substitutions import Command, FindExecutable, LaunchConfiguration
@@ -45,7 +47,14 @@ def launch_setup(context):
     else:
         final_mujoco_model = ''
 
+    with open(f'{pkg_ctrl}/config/urdf_config.yaml') as f:
+        urdf_config = yaml.safe_load(f)
+
     xacro_cmd = f'{xacro} {urdf_xacro_path(pkg_desc, model)}'
+    for key, value in urdf_config.items():
+        if isinstance(value, bool):
+            value = str(value).lower()
+        xacro_cmd += f' {key}:={value}'
     if serial_port:
         xacro_cmd += f' serial_port:={serial_port}'
     if use_mock:
