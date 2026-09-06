@@ -145,6 +145,13 @@ class TestComputeGripperTarget:
         node._gripper_raw = 1.0
         assert node._compute_gripper_target() == pytest.approx(1.0)
 
+    def test_released_raw_value_remaps_to_midpoint_not_lower_limit(self, node):
+        # Open (released) target is the midpoint between lower and upper, not the
+        # full-open mechanical limit.
+        node._gripper_limit = (-1.0, 1.0)
+        node._gripper_raw = -1.0
+        assert node._compute_gripper_target() == pytest.approx(0.0)
+
     def test_effort_gain_disabled_by_default_ignores_current_effort(self, node):
         node._gripper_limit = (-1.0, 1.0)
         node._gripper_raw = 1.0  # -> target 1.0 (upper)

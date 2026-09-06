@@ -229,9 +229,11 @@ class TeleopIkNode(Node):
         if self._gripper_limit is None or self._gripper_raw is None:
             return None
         lower, upper = self._gripper_limit
-        target = _remap(self._gripper_raw, lower, upper)
+        # Released position is the midpoint, not the full-open mechanical limit.
+        open_position = (lower + upper) / 2
+        target = _remap(self._gripper_raw, open_position, upper)
         if self._effort_gain and self._current_effort is not None:
-            target = min(max(target - self._effort_gain * self._current_effort, lower), upper)
+            target = min(max(target - self._effort_gain * self._current_effort, open_position), upper)
         return target
 
     def _on_seed_timeout(self) -> None:

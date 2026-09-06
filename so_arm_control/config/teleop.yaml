@@ -35,7 +35,7 @@
       axis_mappings:
         data:
           axis: 5
-          scale: -0.75  # Negated: raw axis 5 reads opposite press=close/release=open
+          scale: -1.0 # Negated (direction only, magnitude 1.0): raw axis 5 reads opposite
           offset: 0.0
 
     # Fires bool_toggle_node's Trigger services below.
